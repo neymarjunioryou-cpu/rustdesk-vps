@@ -8,11 +8,11 @@ jobs:
       - name: Install XFCE + deps
         run: |
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq xfce4 xvfb dbus-x11 wget
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq xfce4 xvfb dbus-x11 wget libxdo3 gstreamer1.0-pipewire
       - name: Install RustDesk
         run: |
           wget -q -O /tmp/rd.deb https://github.com/rustdesk/rustdesk/releases/download/1.4.6/rustdesk-1.4.6-x86_64.deb
-          sudo dpkg -i /tmp/rd.deb
+          sudo dpkg -i /tmp/rd.deb 2>/dev/null || true
           sudo apt-get install -f -y -qq
       - name: Start RustDesk service
         run: |
