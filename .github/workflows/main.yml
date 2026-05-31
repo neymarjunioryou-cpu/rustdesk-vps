@@ -1,15 +1,7 @@
 name: RustDesk VPS
-
-on: workflow_dispatch
-
+on: [workflow_dispatch]
 jobs:
   desktop:
     runs-on: ubuntu-latest
-    timeout-minutes: 360
     steps:
-      - run: sudo apt-get update -qq && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq xfce4 xvfb dbus-x11 wget
-      - run: wget -q -O /tmp/rd.deb https://github.com/rustdesk/rustdesk/releases/download/1.4.6/rustdesk-1.4.6-x86_64.deb && sudo dpkg -i /tmp/rd.deb && sudo apt-get install -f -y -qq
-      - run: sudo systemctl start rustdesk 2>/dev/null || nohup /usr/lib/rustdesk/rustdesk --service &>/dev/null & sleep 3
-      - run: mkdir -p ~/.config/rustdesk && echo 'password = "rdk123"' > ~/.config/rustdesk/RustDesk2.toml
-      - run: sudo service dbus start 2>/dev/null || true && Xvfb :99 -screen 0 1920x1080x24 & sleep 2 && DISPLAY=:99 startxfce4 &>/dev/null & sleep 5
-      - run: echo "ID:"; find ~/.local/share/rustdesk /var/lib/rustdesk /etc/rustdesk ~/.config/rustdesk -name "*.toml" 2>/dev/null | head -10; echo "Password: rdk123"; echo "Install RustDesk from https://rustdesk.com/"; sleep 21600
+      - run: echo hello
